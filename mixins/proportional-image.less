@@ -1,0 +1,54 @@
+//
+// Images
+// --------------------------------------------------
+
+/*
+	To force correct aspect ratio for image container the bottom padding
+	must be calculated within template in a <style> tag or inline, e.g.:
+
+		<div class="img-box-width image loading" style="max-width: {{ IMAGE_WIDTH }};">
+			 <div class="img-box-height" style="padding-bottom: {{ IMAGE_HEIGHT / IMAGE_WIDTH * 100 }}%;">
+			 	<div class="img-wrap">
+					 <img data-src="/images/...">
+
+	Notes:
+		- Border and padding must be added directly to `<img>` not `.img-wrap`
+		  and/or it can be added to outer `.imb-box-width` element
+
+		- For inline images the outer `.img-box-width` container element
+		  must have `width` defined instead of `max-width`
+
+		- For inline images the `display` property of the parent element
+		  that wraps `<img>` must be `inline`
+*/
+
+.proportional-image(@image-bg) {
+
+	.img-box-width {
+
+		.img-box-height {
+			position: relative;
+			height: 0;
+		}
+
+		.img-wrap {
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+			text-align: center;
+			background-color: @image-bg;
+
+			&::before {
+				content: '';
+				display: inline-block;
+				height: 100%;
+				vertical-align: middle;
+			}
+
+			img {
+				display: inline-block;
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+	}
+}
