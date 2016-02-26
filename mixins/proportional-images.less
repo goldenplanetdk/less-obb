@@ -24,11 +24,13 @@
 
 .proportional-images(@image-bg) {
 
-	.image-inline {
-		display: inline-block;
-	}
-
 	.img-box-width {
+		width: 100%;
+		font-size: 0; // for proper vertical alignment with small images
+
+		&.image-inline {
+			display: inline-block;
+		}
 
 		.img-box-height {
 			position: relative;
