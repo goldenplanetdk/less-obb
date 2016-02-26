@@ -5,5 +5,5 @@ Collection of general-purpose in-house LESS mixins, rulesets and animations for 
 ### Usage
 
 ```
-@import 'less-obb/obb';
+@import 'less-obb/obb-main';
 ```
