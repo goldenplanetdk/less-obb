@@ -12,8 +12,10 @@
 					 <img data-src="/images/...">
 
 	Notes:
-		- Border and padding must be added directly to `<img>` not `.img-wrap`
-		  and/or it can be added to outer `.imb-box-width` element
+		- Border and padding can be added to `<img>` or `.img-wrap`
+
+		- When a border is applied to the outer `.imb-box-width` element
+		  the border-radius must be applied also to `.img-wrap`
 
 		- For inline images the outer `.img-box-width` container element
 		  must have `width` defined instead of `max-width`
@@ -39,6 +41,7 @@
 		.img-wrap {
 			position: absolute;
 			top: 0; left: 0; right: 0; bottom: 0;
+			box-sizing: content-box;
 
 			background-color: @image-bg;
 			font-size: 0; // for proper vertical alignment with small images
