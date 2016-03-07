@@ -1,0 +1,120 @@
+//
+// Images
+// --------------------------------------------------
+
+/*
+	To force correct aspect ratio for image container the bottom padding
+	must be calculated within template in a <style> tag or inline, e.g.:
+
+		<div class="img-box-width image image-wrapped loading" style="max-width: {{ IMAGE_WIDTH }};">
+			 <div class="img-box-height" style="padding-bottom: {{ IMAGE_HEIGHT / IMAGE_WIDTH * 100 }}%;">
+			 	<div class="img-wrap">
+
+					<span class="img-upscaled img-border"
+					 	 style="background: url(../blank.gif);" data-background-url="/images/...">
+
+					<img class="img img-border"
+					 	 src="../blank.gif" data-src="/images/...">
+
+			 		<div class="img-border img-border-overlay">
+
+			 		<div class="img-overlay">
+
+	Notes:
+		- Padding and Background must be added to `.img-wrap` element
+
+		- Border must be added to both `.img-border` elements
+		  one is directly added to `<img>` to downscale the image and it is transparent
+		  the next one is added for border container and it will overlay the image
+		  both must have same border properties including `border-radius`
+
+		- For inline block images the outer `.img-box-width` container element
+		  must have `width` defined instead of `max-width`
+
+	    - Extra content can be added relatively into absolutely positioned `img-overlay` element
+
+	    - To modify upscale mode for descendant images of particular component or an image itself
+	      the `image-upscale` or `no-image-upscale` class can be added
+*/
+
+.wrapped-image(@image-bg, @upscale: false) {
+
+	.image-wrapped {
+		width: 100%;
+
+		&.image-inline {
+			display: inline-block;
+		}
+
+		.img-box-height {
+			position: relative;
+			height: 0;
+		}
+
+		.img-wrap,
+		.img-border-overlay,
+		.img-upscaled {
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+		}
+
+		.img-wrap {
+			box-sizing: content-box;
+			background-color: @image-bg;
+			font-size: 0; // for proper vertical alignment with small images
+			text-align: center;
+
+			&::before {
+				content: '';
+				display: inline-block;
+				height: 100%;
+				vertical-align: middle;
+			}
+
+			.img-upscaled {
+				background-position: center center;
+				background-repeat: no-repeat;
+				background-size: contain;
+
+				& when not (@upscale) {
+					display: none;
+				}
+			}
+
+			img {
+				display: inline-block;
+				max-width: 100%;
+				max-height: 100%;
+
+				&.img-border {
+					border-color: transparent !important;
+				}
+
+				& when (@upscale) {
+					// keep image in document flow to accept clicks
+					visibility: hidden;
+				}
+			}
+
+			.img-border-overlay {
+				display: block;
+
+				& when (@upscale) {
+					display: none;
+				}
+			}
+
+			.image-upscale & {
+				.img-upscaled { display: block; }
+				.img { visibility: hidden; }
+				.img-border-overlay { display: none; }
+			}
+
+			.no-image-upscale & {
+				.img-upscaled { display: none; }
+				.img { visibility: visible; }
+				.img-border-overlay { display: block; }
+			}
+		}
+	}
+}
