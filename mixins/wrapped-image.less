@@ -92,7 +92,7 @@
 
 				& when (@upscale) {
 					// keep image in document flow to accept clicks
-					visibility: hidden;
+					opacity: 0;
 				}
 			}
 
@@ -106,13 +106,13 @@
 
 			.image-upscale & {
 				.img-upscaled { display: block; }
-				.img { visibility: hidden; }
+				.img { opacity: 0; }
 				.img-border-overlay { display: none; }
 			}
 
 			.no-image-upscale & {
 				.img-upscaled { display: none; }
-				.img { visibility: visible; }
+				.img { opacity: 1; }
 				.img-border-overlay { display: block; }
 			}
 		}
