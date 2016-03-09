@@ -1,7 +1,7 @@
 {
   "name": "less-obb",
   "main": "obb.less",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "homepage": "https://github.com/goldenplanetdk/less-obb",
   "authors": [
     "Steven Pribilinskiy <stepan@goldenplanet.com>"

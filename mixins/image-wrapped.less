@@ -63,6 +63,7 @@
 			background-color: @image-bg;
 			font-size: 0; // for proper vertical alignment with small images
 			text-align: center;
+			transition: opacity .3s ease-in;
 
 			&::before {
 				content: '';
@@ -93,9 +94,14 @@
 			}
 
 			.img when (@upscale) {
+
 				// Only `<img>` must subscribe for events, e.g. to show a lightbox
-				// It must be kept in the document flow and available for libraries like CloudZoom
-				// `display: none` and `visibility: hidden` cannot be used to hide it
+				// it must be kept in the document flow and available for libraries like CloudZoom
+				// thus `display: none` and `visibility: hidden` cannot be used
+
+				// Here `opacity` is not intended to be used with `transition`
+				// Instead the parent `.img-wrap` must be used for animation
+
 				opacity: 0;
 			}
 
@@ -117,6 +123,17 @@
 				.img-upscaled { display: none; }
 				.img { opacity: 1; }
 				.img-border-overlay { display: block; }
+			}
+		}
+
+		&.loading {
+
+			.img-wrap {
+				opacity: 0;
+
+				.no-js & {
+					opacity: 1;
+				}
 			}
 		}
 
