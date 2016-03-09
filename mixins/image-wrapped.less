@@ -37,7 +37,7 @@
 	      the `image-upscale` or `no-image-upscale` class can be added
 */
 
-.wrapped-image(@image-bg, @upscale: false) {
+.img-wrapped(@image-bg, @upscale: false) {
 
 	.image-wrapped {
 		width: 100%;
@@ -81,7 +81,8 @@
 				}
 			}
 
-			img {
+			img,
+			noscript > img {
 				display: inline-block;
 				max-width: 100%;
 				max-height: 100%;
@@ -89,11 +90,13 @@
 				&.img-border {
 					border-color: transparent !important;
 				}
+			}
 
-				& when (@upscale) {
-					// keep image in document flow to accept clicks
-					opacity: 0;
-				}
+			.img when (@upscale) {
+				// Only `<img>` must subscribe for events, e.g. to show a lightbox
+				// It must be kept in the document flow and available for libraries like CloudZoom
+				// `display: none` and `visibility: hidden` cannot be used to hide it
+				opacity: 0;
 			}
 
 			.img-border-overlay {
@@ -114,6 +117,13 @@
 				.img-upscaled { display: none; }
 				.img { opacity: 1; }
 				.img-border-overlay { display: block; }
+			}
+		}
+
+		.no-js & {
+
+			.img {
+				display: none;
 			}
 		}
 	}
