@@ -7,8 +7,10 @@
 	must be calculated within template in a <style> tag or inline, e.g.:
 
 		<div class="img-box-width image image-wrapped loading" style="max-width: {{ IMAGE_WIDTH }};">
+
 			 <div class="img-box-height" style="padding-bottom: {{ IMAGE_HEIGHT / IMAGE_WIDTH * 100 }}%;">
-			 	<div class="img-wrap">
+
+			 	<div class="img-wrap img-border">
 
 					<span class="img-upscaled img-border"
 					 	 style="background: url(../blank.gif);" data-background-url="/images/...">
@@ -27,6 +29,9 @@
 		  one is directly added to `<img>` to downscale the image and it is transparent
 		  the next one is added for border container and it will overlay the image
 		  both must have same border properties including `border-radius`
+
+	    - To avoid color fringe when border radius is applied
+	      raise `border-radius` for `.img-wrap` exclusively `+1px`
 
 		- For inline block images the outer `.img-box-width` container element
 		  must have `width` defined instead of `max-width`
@@ -61,6 +66,7 @@
 		.img-wrap {
 			box-sizing: content-box;
 			background-color: @image-bg;
+			border-width: 0;
 			font-size: 0; // for proper vertical alignment with small images
 			text-align: center;
 			transition: opacity .3s ease-in;
