@@ -36,10 +36,18 @@
 		- For inline block images the outer `.img-box-width` container element
 		  must have `width` defined instead of `max-width`
 
-	    - Extra content can be added relatively into absolutely positioned `img-overlay` element
+	    - Extra content can be added relatively into absolutely positioned `.img-overlay` element
+	      by default the element is not attached to any side
+
+	      Note that when hovering an overlayed content the mouse events attached to the image
+	      will not trigger, that can be an issue for plugins like CloudZoom
+	      If that is an issue apply `pointer-events: none` to `.img-overlay`
+
+	      Note that `font-size` is set to 0 for the parent `.img-wrap` to aid in vertical alignment
+	      so it must be overridden
 
 	    - To modify upscale mode for descendant images of particular component or an image itself
-	      the `image-upscale` or `no-image-upscale` class can be added
+	      the `image-upscale` or `no-image-upscale` class can be added to an ancestor element
 */
 
 .img-wrapped(@image-bg: transparent, @upscale: false) {
@@ -58,8 +66,7 @@
 
 		.img-wrap,
 		.img-background,
-		.img-upscaled,
-		.img-overlay {
+		.img-upscaled {
 			position: absolute;
 			top: 0; left: 0; right: 0; bottom: 0;
 		}
@@ -71,9 +78,11 @@
 		.img-wrap {
 			box-sizing: content-box;
 			border-width: 0;
-			font-size: 0; // for proper vertical alignment with small images
 			text-align: center;
 			transition: opacity .3s ease-in;
+
+			// for proper vertical alignment with small images
+			font-size: 0;
 
 			&::before {
 				content: '';
@@ -126,6 +135,11 @@
 			background-position: center center;
 			background-repeat: no-repeat;
 			background-size: contain;
+		}
+
+		.img-overlay {
+			position: absolute;
+			font-size: 1rem;
 		}
 
 		&.loading {
