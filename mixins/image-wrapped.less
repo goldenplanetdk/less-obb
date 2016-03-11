@@ -43,8 +43,8 @@
 	      will not trigger, that can be an issue for plugins like CloudZoom
 	      If that is an issue apply `pointer-events: none` to `.img-overlay`
 
-	      Note that `font-size` is set to 0 for the parent `.img-wrap` to aid in vertical alignment
-	      so it must be overridden
+	      Note that `font-size` and `line-height` are set to 0 for the parent `.img-wrap`
+	      to aid in vertical alignment, so it must be overridden for the overlayed text
 
 	    - To modify upscale mode for descendant images of particular component or an image itself
 	      the `image-upscale` or `no-image-upscale` class can be added to an ancestor element
@@ -57,6 +57,7 @@
 
 		&.image-inline {
 			display: inline-block;
+			vertical-align: middle;
 		}
 
 		.img-box-height {
@@ -83,6 +84,7 @@
 
 			// for proper vertical alignment with small images
 			font-size: 0;
+			line-height: 0;
 
 			&::before {
 				content: '';
@@ -140,6 +142,7 @@
 		.img-overlay {
 			position: absolute;
 			font-size: 1rem;
+			line-height: normal;
 		}
 
 		&.loading {
