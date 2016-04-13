@@ -1,7 +1,7 @@
 {
-  "name": "less-obb",
+  "name": "@goldenplanet/less",
   "description": "LESS common styles for OpenBizBox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     "Steven Pribilinskiy <stepan@goldenplanet.com>"
   ],
