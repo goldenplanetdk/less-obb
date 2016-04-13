@@ -1,18 +1,12 @@
 {
   "name": "less-obb",
-  "main": "obb.less",
-  "version": "0.4.1",
-  "homepage": "https://github.com/goldenplanetdk/less-obb",
+  "description": "LESS common styles for OpenBizBox",
+  "version": "1.0.0",
   "authors": [
     "Steven Pribilinskiy <stepan@goldenplanet.com>"
   ],
-  "description": "LESS common styles for OpenBizBox",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test"
-  ],
+  "homepage": "https://github.com/goldenplanetdk/less-obb",
+  "main": "obb.less",
   "devDependencies": {
     "less": "~2.5.3"
   }
