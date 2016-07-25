@@ -14,10 +14,6 @@
 	margin-left: auto !important;
 }
 
-.m-11 {
-	margin: 11px;
-}
-
 .make-spacing-rules(@prop, @abbrev) {
 
 	@spacer:   1rem;
@@ -33,7 +29,7 @@
 
 	.next-spacer(@size-index) when (@size-index <= length(@spacers)) {
 
-		@lengths: extract(@spacers, @size-index);
+		@lengths: extract(@spacers, @size-index + 1);
 		@length-x: extract(@lengths, 1);
 		@length-y: extract(@lengths, 2);
 
@@ -62,7 +58,7 @@
 		.next-spacer(@size-index + 1);
 	}
 
-	.next-spacer(1);
+	.next-spacer(0);
 }
 
 .make-spacing-rules(margin, m);
