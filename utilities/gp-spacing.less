@@ -1,0 +1,69 @@
+//
+// Spacing utilities port from Bootstrap 4 Sass
+//
+// Source: https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_spacing.scss
+// Documentation: http://v4-alpha.getbootstrap.com/components/utilities/
+// --------------------------------------------------
+
+// Width
+.w-100 { width: 100% !important; }
+
+// Margin and Padding
+.m-x-auto {
+	margin-right: auto !important;
+	margin-left: auto !important;
+}
+
+.m-11 {
+	margin: 11px;
+}
+
+.make-spacing-rules(@prop, @abbrev) {
+
+	@spacer:   1rem;
+	@spacer-x: @spacer;
+	@spacer-y: @spacer;
+	
+	@spacers:
+		0 0,
+		@spacer-x @spacer-y,
+		(@spacer-x * 1.5) (@spacer-y * 1.5),
+		(@spacer-x * 3) (@spacer-y * 3)
+	;
+
+	.next-spacer(@size-index) when (@size-index <= length(@spacers)) {
+
+		@lengths: extract(@spacers, @size-index);
+		@length-x: extract(@lengths, 1);
+		@length-y: extract(@lengths, 2);
+
+		.@{abbrev}-a-@{size-index} { @{prop}: @length-y @length-x !important; }
+
+		// a = All sides
+		.@{abbrev}-t-@{size-index} { @{prop}-top: @length-y !important; }
+
+		.@{abbrev}-r-@{size-index} { @{prop}-right: @length-x !important; }
+
+		.@{abbrev}-b-@{size-index} { @{prop}-bottom: @length-y !important; }
+
+		.@{abbrev}-l-@{size-index} { @{prop}-left: @length-x !important; }
+
+		// Axes
+		.@{abbrev}-x-@{size-index} {
+			@{prop}-right: @length-x !important;
+			@{prop}-left: @length-x !important;
+		}
+
+		.@{abbrev}-y-@{size-index} {
+			@{prop}-top: @length-y !important;
+			@{prop}-bottom: @length-y !important;
+		}
+
+		.next-spacer(@size-index + 1);
+	}
+
+	.next-spacer(1);
+}
+
+.make-spacing-rules(margin, m);
+.make-spacing-rules(padding, p);
